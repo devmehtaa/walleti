@@ -3,8 +3,9 @@
 ```jsx
 git clone https://github.com/devmehtaa/walleti.git
 ```
-
-- npm install
+```bash
+npm i --legacy-peer-deps
+```
 - Run postgres either locally or on the cloud (neon.tech)
 
 ```jsx
@@ -13,6 +14,10 @@ docker run  -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
 
 - Copy over all .env.example files to .env
 - Update .env files everywhere with the right db url
+```bash
+postgresql://postgres:mysecretpassword@localhost:5432/postgres
+```
+
 - Go to `packages/db`
     - npx prisma migrate dev
     - npx prisma db seed
