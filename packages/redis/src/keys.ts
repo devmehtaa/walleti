@@ -1,0 +1,18 @@
+export const keys = {
+  session: (userId: string) => `session:${userId}`,
+  sessionBlocklist: (tokenId: string) => `session:block:${tokenId}`,
+  rateLimit: (scope: string, id: string) => `ratelimit:${scope}:${id}`,
+  stripeEvent: (eventId: string) => `stripe:event:${eventId}`,
+  balance: (userId: number) => `balance:${userId}`,
+  otp: (phone: string) => `otp:${phone}`,
+  lock: (resource: string) => `lock:${resource}`,
+  onRamp: (token: string) => `onramp:${token}`,
+  velocityTopup: (userId: number) => `velocity:topup:${userId}`,
+  velocityTransfer: (userId: number) => `velocity:transfer:${userId}`,
+  velocityTransferCount: (userId: number) => `velocity:transfer:count:${userId}`,
+  activity: (userId: number) => `activity:${userId}`,
+  notifyQueue: "notify:queue",
+  stripeQueue: "stripe:events:queue",
+  leaderboardDaily: "leaderboard:transfers:daily",
+  feature: (name: string) => `feature:${name}`,
+} as const;

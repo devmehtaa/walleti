@@ -1,0 +1,97 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "title": "P2P transfer latency (p95)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(wallet_transfer_duration_seconds_bucket[5m])) by (le, status))",
+          "legendFormat": "{{status}}"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "title": "Stripe webhook lag (p95)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(wallet_webhook_lag_seconds_bucket[5m])) by (le, event_type))",
+          "legendFormat": "{{event_type}}"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "id": 3,
+      "title": "Redis balance cache hit rate",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "sum(rate(wallet_redis_cache_hits_total{cache=\"balance\"}[5m])) / (sum(rate(wallet_redis_cache_hits_total{cache=\"balance\"}[5m])) + sum(rate(wallet_redis_cache_misses_total{cache=\"balance\"}[5m])))",
+          "legendFormat": "hit rate"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "id": 4,
+      "title": "Failed logins / min",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "sum(rate(wallet_failed_logins_total[5m])) by (reason) * 60",
+          "legendFormat": "{{reason}}"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 },
+      "id": 5,
+      "title": "Notifications sent",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "sum(rate(wallet_notifications_sent_total[5m])) by (channel, status)",
+          "legendFormat": "{{channel}} {{status}}"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 },
+      "id": 6,
+      "title": "Reconciliation discrepancies",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "max(wallet_reconciliation_discrepancies)"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["walleti"],
+  "templating": { "list": [] },
+  "time": { "from": "now-1h", "to": "now" },
+  "timezone": "browser",
+  "title": "Walleti Overview",
+  "uid": "walleti-overview",
+  "version": 1
+}

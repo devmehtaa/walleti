@@ -5,7 +5,8 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "workers:dev": "npm run dev --workspace=notification-worker & npm run dev --workspace=stripe-webhook-consumer & npm run dev --workspace=reconciliation-worker"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

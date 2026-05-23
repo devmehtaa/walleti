@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: user-app
+    metrics_path: /api/metrics
+    static_configs:
+      - targets: ["host.docker.internal:3001"]
+        labels:
+          service: user-app
+
+  - job_name: notification-worker
+    static_configs:
+      - targets: ["host.docker.internal:9101"]
+        labels:
+          service: notification-worker
+
+  - job_name: stripe-webhook-consumer
+    static_configs:
+      - targets: ["host.docker.internal:9102"]
+        labels:
+          service: stripe-webhook-consumer
+
+  - job_name: reconciliation-worker
+    static_configs:
+      - targets: ["host.docker.internal:9103"]
+        labels:
+          service: reconciliation-worker

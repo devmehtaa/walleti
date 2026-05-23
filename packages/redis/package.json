@@ -1,0 +1,14 @@
+{
+  "name": "@repo/redis",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "ioredis": "^5.4.2"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}
